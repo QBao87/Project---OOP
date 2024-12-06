@@ -2,7 +2,10 @@
 ### GAME PROJECT: TETRIS - DEVELOPED BY GROUP 18
 
 ## Group members:
-Truong Quan Bao
+# 1. Trương Quân Bảo - ITDSIU20120
+# 2.
+
+
 ## Fonts used in the game:
 # Chopsic
 # Digital Display

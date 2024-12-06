@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.sound.sampled.Clip;
 
@@ -26,16 +25,7 @@ import gui.MyButton;
 								
 public class GameScreen extends Screen implements Runnable {
 
-	private static BufferedImage background1;
-	private static BufferedImage background2;
-	private static BufferedImage background3;
-	private static BufferedImage background4;
-	private static BufferedImage background5;
-	private static BufferedImage background6;
-	private static BufferedImage background7;
-	private static BufferedImage background8;
-	private static BufferedImage background9;
-	private static BufferedImage background10;
+	private static BufferedImage background;
 	private BufferedImage success;
 	private BufferedImage failed;
 	private BufferedImage sadEmoji;
@@ -73,9 +63,6 @@ public class GameScreen extends Screen implements Runnable {
 	private int winLoop = 0;
 	private int loseLoop = 0;
 
-	private Random rand = new Random();
-	private int red, green, blue, alpha;
-	private Color[] color = new Color[10];
 	private static int minuteStarter = 0; 
 	private static int secondStarter = 0;
 	private static int[] listOfLines = new int[] {1, 5, 15, 20, 25, 30, 35, 40, 45, 50};
@@ -95,7 +82,7 @@ public class GameScreen extends Screen implements Runnable {
 		star = FileLoader.loadImage("/star.png");
 		backToMenu = FileLoader.loadImage("/back-to-menu.png");
 		pause = FileLoader.loadImage("/pause-play.png");
-		pauseScreen = FileLoader.loadImage("/pause-screen.png");
+		pauseScreen = FileLoader.loadImage("/pause.png");
 		speaker = FileLoader.loadImage("/speak-mute.png");
 		playAgain = FileLoader.loadImage("/play-again.png");
 		next = FileLoader.loadImage("/next.png");
@@ -115,24 +102,7 @@ public class GameScreen extends Screen implements Runnable {
 		buttons.add(buttonPause);
 		buttons.add(buttonSpeaker);
 
-		background1 = FileLoader.loadImage("/background1.jpg");
-		background2 = FileLoader.loadImage("/background2.jpg");
-		background3 = FileLoader.loadImage("/background3.jpg");
-		background4 = FileLoader.loadImage("/background4.jpg");
-		background5 = FileLoader.loadImage("/background5.jpg");
-		background6 = FileLoader.loadImage("/background6.jpg");
-		background7 = FileLoader.loadImage("/background7.jpg");
-		background8 = FileLoader.loadImage("/background8.jpg");
-		background9 = FileLoader.loadImage("/background9.jpg");
-		background10 = FileLoader.loadImage("/background10.jpg");
-	
-		for (int i = 0; i < 10; i++) {
-			red = rand.nextInt(256); 
-			green = rand.nextInt(256); 
-			blue = rand.nextInt(256);
-			alpha = rand.nextInt(256);
-			color[i] = new Color(red, green, blue, alpha);
-		}
+		background = FileLoader.loadImage("/bg.jpg");
 	}
 
 	@Override
@@ -232,47 +202,15 @@ public class GameScreen extends Screen implements Runnable {
 	public void paint(Graphics g) {
 		int width = game.getWindow().getCanvas().getWidth();
 		int height = game.getWindow().getCanvas().getHeight();
-		// Change theme
-		inGame.setFlag();
-		int index = inGame.getFlag();
-		if (index == 0) {
-			g.drawImage(background1, 0, 0, width, height, null);
-		}
-		else if (index == 1) {
-			g.drawImage(background2, 0, 0, width, height, null);
-		}
-		else if (index == 2) {
-			g.drawImage(background3, 0, 0, width, height, null);
-		}
-		else if (index == 3) {
-			g.drawImage(background4, 0, 0, width, height, null);
-		}
-		else if (index == 4) {
-			g.drawImage(background5, 0, 0, width, height, null);
-		}
-		else if (index == 5) {
-			g.drawImage(background6, 0, 0, width, height, null);
-		}
-		else if (index == 6) {
-			g.drawImage(background7, 0, 0, width, height, null);
-		}
-		else if (index == 7) {
-			g.drawImage(background8, 0, 0, width, height, null);
-		}
-		else if (index == 8) {
-			g.drawImage(background9, 0, 0, width, height, null);
-		}
-		else if (index == 9) {
-			g.drawImage(background10, 0, 0, width, height, null);
-		}
-
+		g.drawImage(background, 0, 0, width, height, null);
+		
 		// Draw board
 		Graphics2D g2d = (Graphics2D) g;
 		int boardWidth = inGame.getBoard().getWidth();
 		int boardHeight = inGame.getBoard().getHeight();
 		int blockSize = inGame.getBlockSize();
-		g2d.setStroke(new BasicStroke(5));
-		g2d.setColor(color[index]);		
+		g2d.setStroke(new BasicStroke(3));
+		g2d.setColor(new Color(255, 255, 255,80));		
 		for (int i = 0; i <= boardHeight; i++) { 
 			g2d.drawLine(200, i * blockSize, boardWidth * blockSize + 200, i * blockSize);
 		}
@@ -280,32 +218,32 @@ public class GameScreen extends Screen implements Runnable {
 			g2d.drawLine(j * blockSize + 200, 0, j * blockSize + 200, boardHeight * blockSize);
 		}
 
-		// Display FPS
-		g.setFont(new Font("Metal Lord", Font.PLAIN, 30));    
-		g.setColor(Color.decode("#ff8c00"));
-		g.drawString("FPS: " + engine.Game.getFps(), 20, 30);
+		// Display group name
+		g.setFont(new Font("Chopsic", Font.PLAIN, 15));    
+		g.setColor(Color.WHITE);
+		g.drawString("Group:\nLone Wolves", 20, 30);
 
 		// Display line and stage
 		int line = inGame.getBoard().getCount();
-		g.setColor(Color.decode("#ff1493"));
-		g.setFont(new Font("Pricedown Bl", Font.PLAIN, 40));    
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Chopsic", Font.PLAIN, 30));    
 		if (MenuScreen.getMode() != 3)
-				g.drawString("\nLine: " + line, 20, 200);
+				g.drawString("\nLINE: " + line, 20, 200);
 		else {
 			if (stage < 10) {
 				if (stage < 0)
 					stage = 0;
-				g.drawString("\nLine: " + line + "/" +  listOfLines[stage], 20, 200);
-				g.setFont(new Font("POLAR VORTEX", Font.PLAIN, 30));    
-				g.setColor(Color.decode("#33a0ff"));
-				g.drawString("Stage " + (stage + 1), 20, 130);	
+				g.drawString("\nLINE: " + line + "/" +  listOfLines[stage], 20, 200);
+				g.setFont(new Font("Chopsic", Font.PLAIN, 30));    
+				g.setColor(Color.WHITE);
+				g.drawString("STAGE " + (stage + 1), 20, 130);	
 			}
 		}
 
 		// Display score and combo
 		int score = inGame.getScore();
 		g.setFont(new Font("Chopsic", Font.PLAIN, 30));  
-		g.setColor(Color.YELLOW);
+		g.setColor(Color.WHITE);
 		if (Board.getCombo() == 0 && count == 0)
 			combo = 0;
 		else if (Board.getCombo() >= 1 && count > 0) {
@@ -317,7 +255,7 @@ public class GameScreen extends Screen implements Runnable {
 		}
 	
 		g.drawString("COMBO", 20, 300);
-		g.drawString("Score", 20, 390);
+		g.drawString("SCORE", 20, 390);
 		g.setColor(Color.RED);
 		g.setFont(new Font("Chopsic", Font.PLAIN, 30));  
 		g.drawString("X" + combo, 20, 330);
@@ -329,7 +267,7 @@ public class GameScreen extends Screen implements Runnable {
 			g.setColor(Color.RED);
 		else
 			g.setColor(Color.decode("#0fff6b"));
-		g.setFont(new Font("Time Trap", Font.BOLD, 35));
+		g.setFont(new Font("Chopsic", Font.BOLD, 35));
 		g.drawString("TIME", 20, 520);
 		g.setFont(new Font("Digital Display", Font.BOLD, 50));
 		
@@ -361,13 +299,12 @@ public class GameScreen extends Screen implements Runnable {
 			g.drawString(secondStarter + "", 100, 570);
 		
 		// Display "NEXT"
-		g.setFont(new Font("Time Trap", Font.PLAIN, 35));
-		g.setColor(Color.MAGENTA);
+		g.setFont(new Font("Chopsic", Font.PLAIN, 35));
+		g.setColor(Color.WHITE);
 		g.drawString("NEXT", game.getWidth() - 160, 50);
 
 		// Display level
-		g.setColor(Color.CYAN);
-		g.drawString("Level  " + level, game.getWidth() - 160, 280);
+		g.drawString("LEVEL  " + level, game.getWidth() - 160, 280);
 		
 		// Display block and next block
 		inGame.paint(g);
@@ -467,7 +404,7 @@ public class GameScreen extends Screen implements Runnable {
 			}
 			Clock.suspend();
 
-			String path = "C:\\Users\\GIA BAO\\Desktop\\Tetris\\source\\main\\data.txt";
+			String path = "Tetris\\source\\main\\data.txt";
 			String scoreString = "", lineString = "", timeString = "";
 			try {
 				File file = new File(path);

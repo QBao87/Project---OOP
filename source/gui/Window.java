@@ -46,11 +46,11 @@ public class Window {
 		canvas.setMinimumSize(s);
 
 		bar.setValue(0);
-		bar.setBounds(0, game.getHeight() - 15, game.getWidth(), 15);
-		bar.setFont(new Font("Pricedown Bl", Font.BOLD, 10));
+		bar.setBounds(0, game.getHeight() - 20, game.getWidth(), 20);
+		bar.setFont(new Font("Pricedown Bl", Font.BOLD, 15));
 		bar.setStringPainted(true);
-		bar.setForeground(Color.GREEN);
-		bar.setBackground(Color.ORANGE);
+		bar.setForeground(Color.RED);
+		bar.setBackground(Color.WHITE);
 		bar.setVisible(false);
 
 		frame = new JFrame(game.getTitle());

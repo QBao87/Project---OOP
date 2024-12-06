@@ -165,35 +165,6 @@ public class Shape {
 		}
 	}
 
-	private void moveY(int delta) {     // future update
-		ArrayList<Block> tempBlocks = new ArrayList<Block>();
-		for (Block block: blocks) {
-			tempBlocks.add(new Block(block.getColor(), block.getX(), block.getY()));
-		}
-		for (Block block: tempBlocks) {
-			block.setLocal(block.getX(), block.getY() + delta);
-		}
-		boolean flag = true;
-		for (Block block: tempBlocks) {
-			if (block.getY() < 0 || block.getY() >= inGame.getBoard().getHeight()) {
-				flag = false;
-				break;
-			}
-			if (color != 9) {
-				for (Block otherBlock : inGame.getBoard().getBlocks()) {
-					if (block.getX() == otherBlock.getX() && block.getY() == otherBlock.getY()) {
-						flag = false;
-						break;
-					}
-				}
-			}			
-		}
-		if (flag) {
-			blocks = tempBlocks;
-			y += delta;
-		}
-	}
-
 	public void teleport() {
 		delay = 0;
 	}

@@ -79,7 +79,7 @@ public class MenuScreen extends Screen {
 
 	public MenuScreen(Game game) {
 		super(game);
-		loading = FileLoader.loadImage("/loading.png");
+		loading = FileLoader.loadImage("/home-screen.png");
 		background = FileLoader.loadImage("/home-screen.png");
 		tetris = FileLoader.loadImage("/tetris.png");
 		records = FileLoader.loadImage("/records.png");
@@ -98,24 +98,24 @@ public class MenuScreen extends Screen {
 		selectLevel = FileLoader.loadImage("/level.png");
 
 		buttonRecords = new MyButton(game, FileLoader.loadImage("/leaderboard.png"), 20, 20, 78, 50);
-		buttonCancelRecords = new MyButton(game, FileLoader.loadImage("/cancel.png"), 243, 487, 211, 68);
+		buttonCancelRecords = new MyButton(game, FileLoader.loadImage("/1.png"), 243, 487, 211, 68);
 		buttonSpeaker = new MyButton(game, speaker.getSubimage(0, 0, 512, 512), 635, 30, 40, 40);
-		buttonContinue = new MyButton(game, FileLoader.loadImage("/continue.png"), 177, 100, 345, 100);
-		buttonNewGame = new MyButton(game, FileLoader.loadImage("/new-game.png"), 177, 200, 345, 100);
-		buttonHowToPlay = new MyButton(game, FileLoader.loadImage("/how-to-play.png"), 191, 300, 324, 93);
-		buttonQuit = new MyButton(game, FileLoader.loadImage("/quit.png"), 177, 395, 345, 100);
-		buttonExit = new MyButton(game, FileLoader.loadImage("/exit.png"), 140, 338, 200, 80);
-		buttonCancelExit = new MyButton(game, FileLoader.loadImage("/cancel-quit.png"), 361, 338, 200, 80);
-		buttonCasual = new MyButton(game, FileLoader.loadImage("/casual.png"), 125, 325, 147, 53);
-		buttonMarathon = new MyButton(game, FileLoader.loadImage("/marathon.png"), 280, 325, 147, 53);
-		buttonAdventure = new MyButton(game, FileLoader.loadImage("/adventure.png"), 433, 325, 147, 53);
-		buttonCancelMode = new MyButton(game, FileLoader.loadImage("/cancel.png"), 274, 400, 154, 50);
+		buttonContinue = new MyButton(game, FileLoader.loadImage("/4.png"), 177, 100, 345, 100);
+		buttonNewGame = new MyButton(game, FileLoader.loadImage("/11.png"), 177, 200, 345, 100);
+		buttonHowToPlay = new MyButton(game, FileLoader.loadImage("/8.png"), 177, 300, 345, 100);
+		buttonQuit = new MyButton(game, FileLoader.loadImage("/12.png"), 177, 395, 345, 100);
+		buttonExit = new MyButton(game, FileLoader.loadImage("/6.png"), 140, 338, 200, 80);
+		buttonCancelExit = new MyButton(game, FileLoader.loadImage("/1.png"), 361, 338, 200, 80);
+		buttonCasual = new MyButton(game, FileLoader.loadImage("/2.png"), 110, 325, 180, 58);
+		buttonMarathon = new MyButton(game, FileLoader.loadImage("/10.png"), 265, 325, 180, 58);
+		buttonAdventure = new MyButton(game, FileLoader.loadImage("/9.png"), 418, 325, 180, 58);
+		buttonCancelMode = new MyButton(game, FileLoader.loadImage("/1.png"), 260, 390, 180, 65);
 		buttonLeft = new MyButton(game, FileLoader.loadImage("/backward.png"), 130, 355, 35, 35);
 		buttonRight = new MyButton(game, FileLoader.loadImage("/forward.png"), 534, 355, 35, 35);
 		buttonBackward = new MyButton(game, FileLoader.loadImage("/backward.png"), 240, 358, 35, 35);
 		buttonForward = new MyButton(game, FileLoader.loadImage("/forward.png"), 423, 358, 35, 35);
 		buttonOK = new MyButton(game, FileLoader.loadImage("/OK.png"), 317, 323, 66, 66);
-		buttonCancelLevel = new MyButton(game, FileLoader.loadImage("/cancel.png"), 268, 425, 162, 60);
+		buttonCancelLevel = new MyButton(game, FileLoader.loadImage("/1.png"), 264, 420, 165, 68);
 
 		buttons.add(buttonContinue);
 		buttons.add(buttonNewGame);
@@ -256,7 +256,6 @@ public class MenuScreen extends Screen {
 			g.drawImage(loading, 0, 0, width, height - 15, null);
 			g.setColor(Color.CYAN);
 			g.setFont(new Font("My Girl Is Retro", Font.PLAIN, 15));
-			g.drawString("D E V E L O P E D     B Y     G R O U P     1 8", 15, 20);
 			try {
 				Thread.sleep(90);
 				percent++;
@@ -291,12 +290,9 @@ public class MenuScreen extends Screen {
 				buttonForward.paint(g);
 				buttonOK.paint(g);
 				buttonCancelLevel.paint(g);
-				g.setColor(Color.MAGENTA);
+				g.setColor(Color.WHITE);
 				g.setFont(new Font("Game Battles 2", Font.BOLD, 70));
-				if (level == 1)
-					g.drawString("" + level, 339, 228);
-				else
-					g.drawString("" + level, 323, 229);
+				g.drawString("" + level, 330, 229);
 			} 
 			else if (isGuide) {
 				BufferedImage[] listOfGuides = {guide1, guide2, guide3, guide4, guide5, guide6, guide7, guide8, guide9};
@@ -311,7 +307,7 @@ public class MenuScreen extends Screen {
 				String stringMinute = "", stringSecond = "";
 				g.drawImage(records, 140, 15, 420, 555, null);
 				buttonCancelRecords.paint(g);
-				File file = new File("C:\\Users\\GIA BAO\\Desktop\\Tetris\\source\\main\\data.txt");
+				File file = new File("Tetris\\source\\main\\data.txt");
 				try {
 					List<String> listOfData = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
 					if (listOfData.size() > 0) {

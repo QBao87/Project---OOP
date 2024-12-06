@@ -21,7 +21,6 @@ public class InGame {
 	private int level;
 	private long count;
 	private int score;
-	private int flag = 0;
 	
 	public InGame(GameScreen gameScreen, int level) {
 		this.gameScreen = gameScreen;
@@ -161,16 +160,6 @@ public class InGame {
 
 	public int getLevel() {
 		return level;
-	}
-
-	public int getFlag() {
-		return flag;
-	}
-
-	public void setFlag() {
-		this.flag = this.getScore() / 500;
-		while (this.flag > 9)
-			this.flag -= 10;
 	}
 
 }
